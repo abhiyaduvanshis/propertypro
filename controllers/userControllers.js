@@ -13,7 +13,7 @@ const userlogin=asyncHandler(async (req,res) =>{
         throw new Error("password is required");
     }
     const user=await User.findOne({email});
-    //console.log(data);
+    console.log(data);
     if(user && (await bcrypt.compare(password,user.password))){
         const accessToken = jwt.sign(
             {
