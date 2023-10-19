@@ -13,7 +13,7 @@ const userlogin=asyncHandler(async (req,res) =>{
         throw new Error("password is required");
     }
     const user=await User.findOne({email});
-    console.log(data);
+    console.log(user);
     if(user && (await bcrypt.compare(password,user.password))){
         const accessToken = jwt.sign(
             {
@@ -24,11 +24,10 @@ const userlogin=asyncHandler(async (req,res) =>{
                 },
             },
             process.env.ACCESS_TOKEN_SECRET
-        )
-        res.status(200).json({_id:user.id,"token":`${ accessToken }`,"msg":"Login successfully"});
+        );
+        res.status(200).json({_id:user.id,"email":`${ user.email }`,"username":`${ user.username }`,"token":`${ accessToken }`,"msg":"Login successfully","statuscode":0});
     }else{
-        res.status(400);
-        throw new Error("Email or password is not correct!");
+        res.status(200).json({"statuscode":0,"msg":"Email or Password is incorrect"});;
     }
 });
 
