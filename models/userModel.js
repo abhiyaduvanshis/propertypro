@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
         type:String,
         required:[true,"Please enter user name"]
     },
+    role:{
+        type:String,
+        required:[true,"Please enter user role"]
+    },
     email:{
         type:String,
         required:[true,"Please enter email"]
@@ -15,6 +19,10 @@ const userSchema = mongoose.Schema({
     password:{
         type:String,
         required:[true,"Please enter password"]
+    },
+    created_by:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:[true]
     },
 },
 {
